@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lets play</title>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        button{
+            display: inline-block;
+            padding: 5px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            margin-top: 5%;
+            margin-left: 45%;
+            background-color: blue;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+        button:hover {background-color: #3e8e41}
+        button:active {
+        background-color: yellow;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+        }
+        table,th,tr, td {
+        border: 1px solid white;
+        border-radius: 10px;
+        text-align: center;
+        color: wheat;
+        }
+        table{
+            width: 60%;
+           margin-top: 5%;
+           background-color: red;
+        }
+    </style>
+</head>
+<body style="background-color: black;">
+
+     
+<lottie-player id="gun1" src="https://assets10.lottiefiles.com/packages/lf20_JGYxV8.json"  background="transparent"  speed="1"  style="width: 25%; height: 25%;margin-left: 70%;margin-top: 5%;"  loop  autoplay ></lottie-player>
+<h1 id="win" style="color: wheat;margin-left: 40%;">
+</h1> 
+<p style="color: wheat;margin-top: 1%;margin-left: 5%;" id="p1power">Player 1</p>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_JGYxV8.json"  background="transparent"  speed="1"  style="width: 25%; height: 25%;margin-left: 10%;transform:rotate(180deg);margin-top: -20%;"  loop  autoplay></lottie-player>
+<p style="color: wheat;margin-top: 1%;margin-left: 90%;" id="p2power">Player2</p>
+<button id="shooter" onclick="return shoot();">SHOOT</a></button>
+
+<center>
+    <table>
+        <tr>
+          <th></th>
+          <th>Wins</th>
+          <th>Health</th>
+        </tr>
+        <tr>
+          <td>PLAYER 1</td>
+          <td id="p1wins">0</td>
+          <td id="p1health">100</td>
+        </tr>
+        <tr>
+          <td>PLAYER 2</td>
+          <td id="p2wins">0</td>
+          <td id="p2health">100</td>
+        </tr>
+      </table>
+</center>
+
+   
+    
+    
+</body>
+<script>
+    var gamer1_health = 100;
+    var gamer2_health = 100;
+    var total_rounds = 5;
+    var gamer1_won = 0;
+    var p1 = document.getElementById("p1wins");
+    var gamer2_won = 0;
+    var p2=document.getElementById("p2wins");
+    var p1p = document.getElementById("p1power");
+    var p2p = document.getElementById("p2power");
+    var p1h = document.getElementById("p1health");
+    var p2h = document.getElementById("p2health");
+    var win = document.getElementById("win");
+    function shoot(){
+    
+      
+        var gamer1_power=(Math.random()*(5-0)+0).toFixed();
+        p1p.innerHTML=gamer1_power;
+        var gamer2_power=(Math.random()*(5-0)+0).toFixed();
+        p2p.innerHTML=gamer2_power;
+        gamer1_health = gamer1_health-gamer2_power;
+        p1h.innerHTML=gamer1_health;
+        gamer2_health = gamer2_health-gamer1_power;
+        p2h.innerHTML=gamer2_health;
+        if(gamer2_power>gamer1_power)
+        gamer2_won= gamer2_won+1;
+        p2.innerHTML=gamer2_won;
+        if(gamer1_power>gamer2_power)
+        gamer1_won = gamer1_won +1;
+        
+        p1.innerHTML=gamer1_won;
+        
+        
+       
+        
+        total_rounds--;
+        if(gamer1_won>=3){
+            win.innerHTML="Winner is player1";
+           
+            document.getElementById("shooter").disabled = true;
+            document.getElementById("shooter").innerHTML="Game Over";
+        }
+       
+        if(gamer2_won>=3){
+             win.innerHTML="Winner is player2";
+            
+            document.getElementById("shooter").disabled = true;
+            document.getElementById("shooter").innerHTML="Game Over";
+        }
+       
+        if(gamer1_health==0)
+        win.innerHTML="Winner is player2";
+        if(gamer2_health==0)
+        win.innerHTML="Winner is player1";
+        
+      
+    }
+    
+</script>
+</html>
